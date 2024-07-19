@@ -1,0 +1,58 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules
+
+# Build output directories
+dist
+dist-ssr
+
+# Miscellaneous
+*.local
+*.env
+*.env.*
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local development files
+*.local
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Optional: temporary files and directories
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.swn
+
+# Package managers
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Coverage reports
+coverage
+
+# System files
+*.pid
+*.seed
+*.db
+*.sqlite
