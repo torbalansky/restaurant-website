@@ -16,6 +16,7 @@ import wingsImg from '../../assets/wings.png';
 import zeleImg from '../../assets/zele_m.png';
 import brownieImg from '../../assets/brownie.png';
 import chiaImg from '../../assets/chia.png';
+import kremImg from '../../assets/karamel.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -35,7 +36,8 @@ const MenuData = [
   { id: 13, name: "Пилешка Супа", price: "5,50 лв.", img: pileshkaImg },
   { id: 14, name: "Чийзкейк", price: "6,00 лв.", img: cakeImg },
   { id: 14, name: "Домашно брауни", price: "6,00 лв.", img: brownieImg },
-  { id: 15, name: "Чия пудинг с плодове ", price: "5,00 лв.", img: chiaImg },
+  { id: 15, name: "Чия пудинг с плодове", price: "5,00 лв.", img: chiaImg },
+  { id: 16, name: "Крем Карамел", price: "4,50 лв.", img: kremImg },
 ];
 
 const Menu = () => {
@@ -75,6 +77,7 @@ const Menu = () => {
     height: '200px',
     objectFit: 'cover',
     borderRadius: '50%',
+    border: '2px solid white',
   };
 
   return (

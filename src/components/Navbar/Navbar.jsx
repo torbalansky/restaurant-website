@@ -33,7 +33,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="bg-lightBlue font-serif">
+        <div className="bg-lightBlue font-serif fixed top-0 left-0 w-full z-50">
             <div className="container py-2">
                 <div className="flex justify-between text-center">
                     <div data-aos='fade-down' data-aos-once='true' data-aos-delay='200'>
@@ -70,7 +70,7 @@ const Navbar = () => {
                         {
                             open && (
                                 <div>
-                                    <ul className='bg-white space-y-3 p-4 rounded-md shadow-md absolute right-10 z-50'>
+                                    <ul className='absolute top-full right-0 bg-white space-y-3 p-4 rounded-md shadow-md z-50'>
                                         {
                                             Menu.map((menu) => (
                                                 <li key={menu.id}>

@@ -53,11 +53,11 @@ const Testimonials = () => {
         dots: true,
         arrows: false,
         infinite: true,
-        speed: 500,
+        speed: 1000,
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
         cssEase: "linear",
         pauseOnHover: true,
         pauseOnFocus: true,
@@ -83,10 +83,10 @@ const Testimonials = () => {
   return (
     <div className="text-white py-10 mb-10">
       <div className="container mx-auto">
-        <h1 className="text-center text-dark text-4xl font-bold mb-10" data-aos='zoom-in'>Отзиви</h1>
+        <h1 className="text-center text-dark text-4xl font-bold mb-10" data-aos='fade-in'>Отзиви</h1>
         <Slider {...settings}>
           {TestimonialData.map((testimonial) => (
-            <div key={testimonial.id} className="p-4" data-aos='zoom-in'>
+            <div key={testimonial.id} className="p-4" data-aos='fade-in'>
               <div className="flex flex-col items-center bg-gray-100 text-black p-6 rounded-lg shadow-lg h-full" style={{ minHeight: '300px', maxHeight: '400px' }}>
                 <img src={testimonial.img} alt={testimonial.name} className="rounded-full w-24 h-24 mb-4 object-cover" />
                 <h2 className="text-xl font-semibold mb-2">{testimonial.name}</h2>
