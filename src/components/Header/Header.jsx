@@ -79,7 +79,7 @@ const Header = () => {
       <div className='container pb-10 sm:pb-0' data-aos='zoom-in'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <div className='flex flex-col justify-center gap-6 pt-12 sm:pt-0 text-center md:text-left'>
-            <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-[140px] font-bold bg-clip-text text-transparent bg-gradient-to-b from-primary to-purple-400 font-cursive'>¡Vamos!</h1>
+            <h1 className='text-8xl sm:text-7xl md:text-7xl lg:text-[140px] font-bold bg-clip-text text-transparent bg-gradient-to-b from-primary to-purple-400 font-cursive'>¡Vamos!</h1>
             <p className='text-dark font-serif'>
               {currentText}
             </p>
