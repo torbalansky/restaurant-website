@@ -8,6 +8,9 @@
     .primary-btn {
         @apply bg-gradient-to-r from-orange-500 to-orange-400 border-2 hover:scale-105 duration-200 text-white py-2 px-4 rounded-full;
     }
+    .secondary-btn {
+        @apply bg-gradient-to-r from-blue-500 to-blue-400 border-2 hover:scale-105 duration-200 text-white py-2 px-4 rounded-full;
+    }
 };
 
 @layer utilities {

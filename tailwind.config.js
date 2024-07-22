@@ -11,6 +11,7 @@ export default {
         dark: "#1e1e1e",
         light: "#f5f5f5",
         lightBlue: "#dbeff7",
+        secondary: "#0c2c4c",
       },
       fontFamily: {
           sans: ["Nunito", "sans-serif"],

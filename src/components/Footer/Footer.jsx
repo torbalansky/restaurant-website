@@ -24,8 +24,6 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          
-          {/* Address */}
           <div className="col-span-1 py-4 px-2 text-white">
             <h1 className="text-xl font-bold mb-3 text-center md:text-left">Контакти</h1>
             <div className="flex items-center gap-3">
@@ -56,7 +54,8 @@ const Footer = () => {
           </div>
           <div className="col-span-1 py-4 px-2 text-white">
             <h1 className="text-xl font-bold mb-3 text-center md:text-left">Работно време</h1>
-            <p className="opacity-80 text-center md:text-left">Понеделник - Петък: 09:00 ч. - 18:30 ч.</p>
+            <p className="opacity-80 text-center md:text-left">Понеделник-Петък: 09:00 ч. - 18:30 ч.</p>
+            <p className="opacity-80 text-center md:text-left">Събота-Неделя: Почивни дни/По заявка</p>
           </div>
         </div>
         <div className="text-center mt-8 p-11 bottom-0 left-0 text-white opacity-90">
