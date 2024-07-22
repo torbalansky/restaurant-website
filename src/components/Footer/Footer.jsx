@@ -35,7 +35,7 @@ const Contact = () => {
           to_email: "torbalansky@gmail.com",
           message: form.message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_APP_EMAILJS_USER_ID
       )
       .then(
         () => {
