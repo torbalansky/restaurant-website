@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import saladImg from '../../assets/salad.png';
 import paellaImg from '../../assets/paella1.png';
@@ -19,31 +19,72 @@ import chiaImg from '../../assets/chia.png';
 import kremImg from '../../assets/karamel.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Modal from '../Modal/Modal.jsx';
+import { FiSearch } from 'react-icons/fi';
 
 const MenuData = [
-  { id: 1, name: "Паея с морски дарове", price: "12,50 лв.", img: paellaImg },
-  { id: 2, name: "Мусака", price: "7,90 лв.", img: musakaImg },
-  { id: 3, name: "Телешки бургер", price: "8,00 лв.", img: burgerImg },
-  { id: 4, name: "Телешка плескавица", price: "11,00 лв.", img: beefImg },
-  { id: 5, name: "Свинска пържола", price: "10,60 лв.", img: porkImg },
-  { id: 6, name: "Пилешки крилца", price: "9,00 лв.", img: wingsImg },
-  { id: 7, name: "Лазаня Болонезе", price: "11,00 лв.", img: lasagnaImg },
-  { id: 8, name: "Салата Цезар", price: "9,00 лв.", img: saladImg },
-  { id: 9, name: "Шопска салата", price: "4,50 лв.", img: shopskaImg },
-  { id: 10, name: "Зеле с моркови", price: "1,80 лв./ 100 гр.", img: zeleImg },
-  { id: 11, name: "Таратор", price: "4,50 лв.", img: taratorImg },
-  { id: 12, name: "Крем Супа", price: "5,00 лв.", img: soupImg },
-  { id: 13, name: "Пилешка Супа", price: "5,50 лв.", img: pileshkaImg },
-  { id: 14, name: "Чийзкейк", price: "6,00 лв.", img: cakeImg },
-  { id: 14, name: "Домашно брауни", price: "6,00 лв.", img: brownieImg },
-  { id: 15, name: "Чия пудинг с плодове", price: "5,00 лв.", img: chiaImg },
-  { id: 16, name: "Крем Карамел", price: "4,50 лв.", img: kremImg },
+  { id: 1, name: "Паея с морски дарове", price: "12,50 лв.", img: paellaImg, ingredients: "Ориз, морски дарове, подправки", allergens: "Миди", quantity: "350 гр.", description: "Традиционна испанска паеля, приготвена с морски дарове, включително миди, калмари и скариди, в ароматен оризов сос." },
+  { id: 2, name: "Мусака", price: "7,90 лв.", img: musakaImg, ingredients: "Картофи, мляно месо, бешамел сос", allergens: "Лактоза", quantity: "300 гр.", description: "Класическа българска мусака с многослойни картофи и мляно месо, покрита с кремообразен бешамел сос." },
+  { id: 3, name: "Телешки бургер", price: "8,00 лв.", img: burgerImg, ingredients: "", allergens: "Глутен", quantity: "350 г", description: "Сочен бургер с телешкo, салата, домат, пържени картофи." },
+  { id: 4, name: "Телешка плескавица", price: "11,00 лв.", img: beefImg, ingredients: "Телешко, подправки", allergens: "Няма", quantity: "300 гр.", description: "Ароматна плескавица от телешко месо, приготвена на скара, сервирана с гарнитури по избор." },
+  { id: 5, name: "Свинска пържола", price: "10,60 лв.", img: porkImg, ingredients: "Свинско, подправки", allergens: "Няма", quantity: "300 гр.", description: "Сочно парче свинска пържола, приготвено до съвършенство на скара, с подправки и ароматни билки." },
+  { id: 6, name: "Пилешки крилца", price: "9,00 лв.", img: wingsImg, ingredients: "Пилешки крилца, подправки", allergens: "Няма", quantity: "250 гр.", description: "Хрупкави пилешки крилца с пикантна марината, идеални за споделяне." },
+  { id: 7, name: "Лазаня Болонезе", price: "11,00 лв.", img: lasagnaImg, ingredients: "Паста, месен сос, сирене", allergens: "Лактоза, Глутен", quantity: "350 гр.", description: "Традиционна лазаня Болонезе с многослойна паста, месен сос и топено сирене, изпечена до златисто." },
+  { id: 8, name: "Салата Цезар", price: "9,00 лв.", img: saladImg, ingredients: "Маруля, пилешко месо, крутони, сирене", allergens: "Лактоза, Глутен", quantity: "250 гр.", description: "Свежа салата Цезар с гриловано пилешко месо, хрупкави крутони и настърган пармезан." },
+  { id: 9, name: "Шопска салата", price: "4,50 лв.", img: shopskaImg, ingredients: "Домат, краставица, сирене, маслини", allergens: "Лактоза", quantity: "200 гр.", description: "Традиционна българска салата с домати, краставици, сирене и маслини, освежаваща и лека." },
+  { id: 10, name: "Зеле с моркови", price: "1,80 лв.", img: zeleImg, ingredients: "Зеле, моркови", allergens: "Няма", quantity: "100 гр.", description: "Здравословна салата от зеле и моркови, с хрупкава текстура и леко кисел вкус." },
+  { id: 11, name: "Таратор", price: "4,50 лв.", img: taratorImg, ingredients: "Кисело мляко, краставица, чесън", allergens: "Лактоза", quantity: "300 гр.", description: "Студена българска супа с кисело мляко, краставица и чесън, идеална за горещи летни дни." },
+  { id: 12, name: "Крем Супа", price: "5,00 лв.", img: soupImg, ingredients: "Сметана, зеленчуци", allergens: "Лактоза", quantity: "300 гр.", description: "Кремообразна супа от подбрани зеленчуци, приготвена със сметана за допълнителна гладкост и вкус." },
+  { id: 13, name: "Пилешка Супа", price: "5,50 лв.", img: pileshkaImg, ingredients: "Пилешко, зеленчуци", allergens: "Няма", quantity: "300 гр.", description: "Класическа пилешка супа, приготвена с пресно пилешко месо и разнообразие от зеленчуци, идеална за всеки сезон." },
+  { id: 14, name: "Чийзкейк", price: "6,00 лв.", img: cakeImg, ingredients: "Крем сирене, захар, основа", allergens: "Лактоза, Глутен", quantity: "150 гр.", description: "Кремообразен чийзкейк с основа от смлени бисквити и крем сирене, завършен с гладък захарен крем." },
+  { id: 15, name: "Домашно брауни", price: "6,00 лв.", img: brownieImg, ingredients: "Шоколад, брашно, яйца", allergens: "Лактоза, Глутен", quantity: "150 гр.", description: "Домашно приготвено шоколадово брауни с богат шоколадов вкус и плътна текстура." },
+  { id: 16, name: "Чия пудинг с плодове", price: "5,00 лв.", img: chiaImg, ingredients: "Чия семена, плодове", allergens: "Няма", quantity: "200 гр.", description: "Здравословен чия пудинг, приготвен с чия семена и свежи плодове, перфектен за закуска или десерт." },
+  { id: 17, name: "Крем Карамел", price: "4,50 лв.", img: kremImg, ingredients: "Яйца, захар, мляко", allergens: "Лактоза", quantity: "150 гр.", description: "Класически крем карамел с гладка текстура и карамелизирана захар отгоре, идеален за сладък завършек." },
 ];
 
 const Menu = () => {
+  const [selectedDish, setSelectedDish] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (dish) => {
+    setSelectedDish(dish);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedDish(null);
+  };
+
+  const CustomPrevArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: 'block', fontSize: '30px', marginLeft: '30px', zIndex: 1 }}
+        onClick={onClick}
+      >
+        ◀
+      </div>
+    );
+  };
+
+  const CustomNextArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: 'block', fontSize: '30px', marginRight: '30px', zIndex: 1 }}
+        onClick={onClick}
+      >
+        ▶
+      </div>
+    );
+  };
+
   const settings = {
     dots: true,
-    arrows: false,
+    arrows: true,
     infinite: true,
     speed: 1000,
     slidesToShow: 4,
@@ -53,6 +94,8 @@ const Menu = () => {
     cssEase: "linear",
     pauseOnHover: true,
     pauseOnFocus: true,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -72,35 +115,37 @@ const Menu = () => {
     ],
   };
 
-  const imageStyle = {
-    width: '200px',
-    height: '200px',
-    objectFit: 'cover',
-    borderRadius: '50%',
-    border: '2px solid white',
-  };
-
   return (
     <div className='bg-primary text-white py-12 font-serif'>
       <div className='container'>
         <div className='space-y-5 mb-10'>
           <h1 className='text-center text-4xl font-bold' data-aos='zoom-in'>Меню</h1>
           <div className='text-center mx-auto sm:max-w-sm text-md opacity-60' data-aos='zoom-in'>
-            Обедното ни меню се обновява ежедневно на нашата <a href='https://www.facebook.com/profile.php?id=61553895167054' target='_blank' rel='noopener noreferrer' className='text-yellow-300 text-semibold'>Facebook</a> страница.
+            Обедното ни меню се обновява ежедневно на нашата <a href='https://www.facebook.com/profile.php?id=61553895167054' target='_blank' rel='noopener noreferrer' className='text-yellow-300 font-semibold'>Facebook</a> страница.
           </div>
           <div data-aos='fade-in'>
             <Slider {...settings}>
               {MenuData.map((menu) => (
-                <div className='my-16' key={menu.id}>
-                  <div className='flex flex-col gap-4 py-8 px-6 rounded-xl'>
-                    <div className='mb-3 flex justify-center'>
-                      <img src={menu.img} alt={menu.name} style={imageStyle} />
-                    </div>
-                    <div className='flex flex-col items-center gap-4'>
-                      <div className='space-y-3 text-center'>
-                        <h1 className='text-xl'>{menu.name}</h1>
-                        <p className='text-3xl font-semibold'>{menu.price}</p>
-                      </div>
+                <div
+                  key={menu.id}
+                  onClick={() => openModal(menu)}
+                  className='my-16 cursor-pointer relative'
+                >
+                  <div className='flex flex-col gap-4 p-8'>
+                  <div className='mb-4 flex justify-center relative group'>
+                    <img
+                      src={menu.img}
+                      alt={menu.name}
+                      className='w-48 h-48 object-cover rounded-full border-2 border-white transition-transform duration-300 group-hover:scale-105'
+                    />
+                    <FiSearch
+                      className='absolute bg-red-500 rounded-[5px] p-2 text-white text-4xl transition-opacity duration-300 opacity-0 group-hover:opacity-100'
+                      style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+                    />
+                  </div>
+                    <div className='flex flex-col items-center gap-4 text-center'>
+                      <h1 className='text-xl'>{menu.name}</h1>
+                      <p className='text-2xl font-semibold'>{menu.price}</p>
                     </div>
                   </div>
                 </div>
@@ -109,6 +154,7 @@ const Menu = () => {
           </div>
         </div>
       </div>
+      {isModalOpen && <Modal isOpen={isModalOpen} onClose={closeModal} dish={selectedDish} />}
     </div>
   );
 };
